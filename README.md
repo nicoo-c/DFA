@@ -1,4 +1,4 @@
-# Simulación de un autómata finito no determinista
+# Simulación de cómputo en un autómata finito no determinista
 
 El programa cuenta con dos funciones para simular el autómata, la primera de forma aleatoria, para esta solo se debe ingresar el número de estados que desea simular.
 

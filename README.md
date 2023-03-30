@@ -10,16 +10,17 @@ La segunda permite simular un autómata específico, este debe ser explicitado p
 - El estado inicial es el estado 0.  
 
 Sea M un DFA con:
-- Estados {q0, q1, q2, q3, q4}  
-- Estado inicial {q0}  
-- Estados finales {q2, q4}  
-- Alfabeto {a, b}  
+- Estados: {q0, q1, q2, q3, q4}  
+- Estado inicial: {q0}  
+- Estados finales: {q2, q4}  
+- Alfabeto: {a, b}  
+- Función de transición: especificada en automata.txt  
 
-*Formato de automata.txt:*
+*Formato de automata.txt*:
 
-        ;a;b;
-    0   ;2;3;
-    1   ;0;1;
-    *2  ;4;1;
-    3   ;2;0;
-    *4  ;4;3;
+            ;a;b;
+        0   ;2;3;
+        1   ;0;1;
+        *2  ;4;1;
+        3   ;2;0;
+        *4  ;4;3;

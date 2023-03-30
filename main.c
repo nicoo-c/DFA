@@ -45,6 +45,7 @@ int main()
         int** func_transicion = (int**)malloc(sizeof(int*) * nFilas);
 
         for(int i = 0; i < nFilas; i++) 
+            
             func_transicion[i] = (int*)malloc(sizeof(int) * nCols);
 
         construir_automata_aleatorio(estado_aceptacion, func_transicion);

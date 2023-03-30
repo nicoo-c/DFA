@@ -9,7 +9,11 @@ La segunda permite simular un autómata específico, este debe ser explicitado p
 - Los estados finales deben marcarse con * seguido del estado.  
 - El estado inicial es el estado 0.  
 
-Sean 0, 1, 2, 3, 4 los estados, con estados finales {2, 4} y {a, b} el alfabeto. (0 estado inicial)
+Sea M un DFA con:
+- Estados {q0, q1, q2, q3, q4}  
+- Estado inicial {q0}  
+- Estados finales {q2, q4}  
+- Alfabeto {a, b}  
 
 *Formato de automata.txt:*
 

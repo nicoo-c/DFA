@@ -9,7 +9,7 @@ La segunda permite simular un autómata específico, este debe ser explicitado p
 - Los estados finales deben marcarse con * seguido del estado.  
 - El estado inicial es el estado 0.  
 
-Sea M un DFA con:
+Sea M un AFD con:
 - Estados: {q0, q1, q2, q3, q4}  
 - Estado inicial: {q0}  
 - Estados finales: {q2, q4}  

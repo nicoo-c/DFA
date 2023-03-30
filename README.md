@@ -8,11 +8,11 @@ Los estados deben empezar desde 0, donde 0 es el estado inicial.
 Sean 0, 1, 2, 3, 4 los estados, con estados finales {2, 4} y {a, b} el alfabeto.
 
     ;a;b;
-0   ;2;3;
-1   ;0;1;
-*2  ;4;1;
-3   ;2;0;
-*4  ;4;3;
+    0   ;2;3;
+    1   ;0;1;
+    *2  ;4;1;
+    3   ;2;0;
+    *4  ;4;3;
 
 Los estados finales deben marcarse con *
 El estado inicial se asume como el estado 0

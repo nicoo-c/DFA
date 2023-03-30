@@ -4,8 +4,9 @@ El programa cuenta con dos funciones para simular el autómata, la primera de fo
 
 Si se desea simular un autómata específico, este se puede ingresar mediante un archivo de texto, el archivo de texto debe llamarse automata.txt y el formato es el siguiente:
 
-        Los estados deben empezar desde 0, donde 0 es el estado inicial. 
-        Sean 0, 1, 2, 3, 4 los estados, con estados finales {2, 4} y {a, b} el alfabeto.
+Los estados deben empezar desde 0, donde 0 es el estado inicial. 
+
+Sean 0, 1, 2, 3, 4 los estados, con estados finales {2, 4} y {a, b} el alfabeto.
 
         ;a;b;
     0   ;2;3;
@@ -14,5 +15,6 @@ Si se desea simular un autómata específico, este se puede ingresar mediante un
     3   ;2;0;
     *4  ;4;3;
 
-        Los estados finales deben marcarse con *
-        El estado inicial se asume como el estado 0
+Los estados finales deben marcarse con *
+
+El estado inicial se asume como el estado 0

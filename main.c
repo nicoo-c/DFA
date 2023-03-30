@@ -2,7 +2,7 @@
 * Programadores: Jorge Bussh, Nicolás Miño
 * Profesor: Rodrigo Abarzúa Ortiz
 * Descripción: El programa genera la descripción instantanea de un string en un DFA, simulando la función de transición, 
-*              ya sea este generado de forma aleatoria o mediante un archivo de texto. 
+*              el DFA puede ser generado de forma aleatoria o mediante un archivo de texto. 
 * Curso: Fundamentos de Ciencia de la Computación I
 * Fecha: 4 de abril, 2023
 */
@@ -19,7 +19,6 @@ void construir_automata(char* alfabeto, bool* estado_aceptacion, int** func_tran
 void emular_func_transicion(int estado_actual, char* alfabeto, int** func_transicion, bool* estado_aceptacion);
 int buscar_alfabeto(char* alfabeto, char c);
 void construir_automata_aleatorio(bool* estado_aceptacion, int** func_transicion);
-void emular_func_transicion_aleatoria(int estado_actual, char* alfabeto, int** func_transicion, bool* estado_aceptacion);
 char menu();
 void imprimir_automata(char* alfabeto, int** func_transicion, bool* estado_aceptacion);
 
@@ -36,10 +35,12 @@ int main()
         char buffer[100];
         int estado_actual = 0;
         nCols = 2;
+
         printf("Ingrese la cantidad de estados que desea ingresar: ");
         scanf("%s", buffer);
         nFilas = atoi(buffer);
         getc(stdin);
+
         bool estado_aceptacion[nFilas];
         int** func_transicion = (int**)malloc(sizeof(int*) * nFilas);
 
@@ -51,9 +52,10 @@ int main()
         emular_func_transicion(estado_actual, alfabeto, func_transicion, estado_aceptacion);
 
         for (int i = 0; i < nFilas; i = i + 1) //limpiar memoria
-            free(func_transicion[i]);
-        free(func_transicion);
 
+            free(func_transicion[i]);
+
+        free(func_transicion);
 
     }else if(k == '2'){
 
@@ -73,12 +75,14 @@ int main()
         emular_func_transicion(estado_actual, alfabeto, func_transicion, estado_aceptacion);
 
         for (int i = 0; i < nFilas; i = i + 1)
+
             free(func_transicion[i]);
 
         free(func_transicion);
 
     }else
-        printf("\nNo te he entendido, adios chavalin.\n");
+
+        printf("\nNo te he entendido, adiós chavalin.\n");
     
     return 0;
 }
@@ -89,6 +93,7 @@ char menu(){
 
     printf("1. Generar un automata aleatorio con los estados que desee.\n");
     printf("2. Ingresar el automata desde un archivo de texto.\n");
+    printf("Ingrese opcion: ");
     scanf("%c%*c", &k);
 
     return k;
@@ -98,16 +103,18 @@ char menu(){
 void calc_dimension(){
 
     FILE* f;
-    f = fopen("1.txt", "r");
+    char c; //para recorrer el archivo
 
-    char c; //para recorrer el archivo  
+    f = fopen("automata.txt", "r");  
 
     c = fgetc(f);
 
     while(c != '\n'){
 
         if(c == ';')
+
             nCols++;
+
         c = fgetc(f);
         
     }
@@ -117,6 +124,7 @@ void calc_dimension(){
     while((c = fgetc(f)) != EOF){
         
         if(c == '\n')
+
             nFilas++;
              
     }
@@ -131,15 +139,17 @@ void construir_automata(char* alfabeto, bool* estado_aceptacion, int** func_tran
     char c, buffer[100]; //para recorrer el archivo
 
     for(i = 0; i < nFilas; i++)
+
         estado_aceptacion[i] = false;
 
     i = 0; 
 
-    f = fopen("1.txt", "r");
+    f = fopen("automata.txt", "r");
 
     c = fgetc(f);
     
     while(c != ';')
+
         c = fgetc(f);     
 
     c = fgetc(f);
@@ -161,8 +171,10 @@ void construir_automata(char* alfabeto, bool* estado_aceptacion, int** func_tran
     while(buffer[l] != '\n'){
 
         if(buffer[l] != ';'){
+
             alfabeto[j] = buffer[l];
             j++;
+
         }
 
         l++;
@@ -177,12 +189,14 @@ void construir_automata(char* alfabeto, bool* estado_aceptacion, int** func_tran
 
     while(c != EOF){
 
-        if(c == '\n'){ //siguiente fila
+        if(c == '\n'){ //avanzar siguiente fila
+
             i++;
             j = -1;
+
         }
 
-        if(c != ';' && j > - 1){ //siguiente columna  //caso leer char de numero ej: 5 
+        if(c != ';' && j > - 1){ //avanzar siguiente columna  //caso leer char de numero ej: 5 
 
             if(isdigit(c)){
 
@@ -206,6 +220,7 @@ void construir_automata(char* alfabeto, bool* estado_aceptacion, int** func_tran
             j++;
 
         }else if(c == '*')
+
             estado_aceptacion[i] = true;
 
         c = fgetc(f);
@@ -230,14 +245,32 @@ void emular_func_transicion(int estado_actual, char* alfabeto, int** func_transi
         fgets(string, 200, stdin);
         n = strlen(string) - 1;
 
+        for(i = 0; i < n; i++){
+
+            c = buscar_alfabeto(alfabeto, string[i]);
+            
+            if(c == -1){
+
+                printf("\nSe encontró un símbolo que no pertenece al alfabeto, proceso detenido.\n\n");
+                goto ingresar;
+
+            }
+
+        }
+
+        printf("\nDescripción instantánea:\n");
+
         printf("\n$");
 
         for(j = 0; j < n; j++){
 
             if(j == i){
+
                 printf("q_{%d}", estado_actual);
                 printf("%c", string[j]);
+
             }else
+
                 printf("%c", string[j]);
 
             }
@@ -247,39 +280,38 @@ void emular_func_transicion(int estado_actual, char* alfabeto, int** func_transi
         for(i = 0; i < n; i++){
 
             c = buscar_alfabeto(alfabeto, string[i]);
-            
-            if(c == -1){
 
-                printf("\nEl simbolo ingresado no pertenece al alfabeto, intente nuevamente...\n");
-                break;
+            estado_actual = func_transicion[estado_actual][c];
 
-            }else{
+            for(j = 0; j < n; j++){
 
-                estado_actual = func_transicion[estado_actual][c];
+                if(j == i){
 
-                for(j = 0; j < n; j++){
+                    printf("%c", string[j]);
+                    printf("q_{%d}", estado_actual);
 
-                    if(j == i){
-                        printf("%c", string[j]);
-                        printf("q_{%d}", estado_actual);
-                    }else
-                        printf("%c", string[j]);
+                }else
 
-                }
+                    printf("%c", string[j]);
 
             }
 
-            if(i != n - 1)
+            if(i != (n - 1))
+
                 printf(" \\vdash ");
         }
 
         printf("$\n\n");
 
         if(estado_aceptacion[estado_actual] == true)
+
             printf("Estado de aceptación del string %s\ttrue\n\n", string);
-        else    
+
+        else
+
             printf("Estado de aceptación del string %s\tfalse\n\n", string);
 
+        ingresar:;
         printf("1. Ingresar otro string.\n");
         printf("2. Salir del programa.\n");
         printf("Ingrese opcion: ");
@@ -296,7 +328,9 @@ int buscar_alfabeto(char* alfabeto, char c){
     for(int i = 0; i < nCols; i++){
 
         if(alfabeto[i] == c)
+
             return i;
+
     }
 
     return -1;
@@ -307,11 +341,15 @@ void imprimir_automata(char* alfabeto, int** func_transicion, bool* estado_acept
     int i, j, max = 0;
 
     printf("\nAlfabeto: {");
+
     for(i = 0; i < nCols; i++){
         
         if(i == nCols - 1)
+
             printf("%c}", alfabeto[i]);
+
         else
+
             printf("%c, ", alfabeto[i]);
 
     }
@@ -321,6 +359,7 @@ void imprimir_automata(char* alfabeto, int** func_transicion, bool* estado_acept
     for(i = 0; i < nFilas; i++){
 
         if(estado_aceptacion[i] == true)
+
             max = i;
 
     }
@@ -332,11 +371,13 @@ void imprimir_automata(char* alfabeto, int** func_transicion, bool* estado_acept
             if(i == max){
 
                 if(estado_aceptacion[i] == true)
+
                     printf("q%d}", i);
 
             }else{
 
                 if(estado_aceptacion[i] == true)
+
                     printf("q%d, ", i);
 
             }
@@ -345,19 +386,20 @@ void imprimir_automata(char* alfabeto, int** func_transicion, bool* estado_acept
 
     printf("\nFuncion de transicion:\n");
 
-    for(i = 0; i < nCols; i++){
+    for(i = 0; i < nCols; i++)
 
         printf("\t%c ", alfabeto[i]);
-
-    }
 
     for(i = 0; i < nFilas; i++){
     
         printf("\n");
         printf("q%d\t", i);
+
         for(j = 0; j < nCols; j++)
+
             printf("q%d\t", func_transicion[i][j]);
     }
+
     printf("\n\n");
 
 }
@@ -376,20 +418,20 @@ void construir_automata_aleatorio(bool* estado_aceptacion, int** func_transicion
         }
     }
     
-    estado_aceptacion:;
-    for(int i = 0; i < nFilas; i++)
-    {
-        estado_aceptacion[i] = rand() % 2;
-    }
+    do{ 
+        
+        for(int i = 0; i < nFilas; i++)
 
-    for(int i = 0; i < nFilas; i++){
+            estado_aceptacion[i] = rand() % 2;
+        
 
-        if(estado_aceptacion[i] == true)
-            k = true;
+        for(int i = 0; i < nFilas; i++){
 
-    }
+            if(estado_aceptacion[i] == true)
+                k = true;
 
-    if(k == false) //caso: no hay estados de aceptación
-        goto estado_aceptacion;
+        }
+
+    }while(k == false); // En caso de no generar ningun estado de aceptacion  
 
 }

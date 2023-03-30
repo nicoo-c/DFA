@@ -15,6 +15,8 @@ Sean 0, 1, 2, 3, 4 los estados, con estados finales {2, 4} y {a, b} el alfabeto.
     3   ;2;0;
     *4  ;4;3;
 
-Los estados finales deben marcarse con *
+El alfabeto es el único elemento que puede ser no númerico, los demás elementos deben ser númericos, no se aceptan estados del tipo 'q0' o '2a'.
 
-El estado inicial se asume como el estado 0
+Los estados finales deben marcarse con *.
+
+El estado inicial se asume como el estado 0.

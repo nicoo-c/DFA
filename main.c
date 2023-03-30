@@ -1,7 +1,7 @@
 /*
 * Programadores: Jorge Bussh, Nicolás Miño
 * Profesor: Rodrigo Abarzúa Ortiz
-* Descripción: El programa genera la descripción instantanea de un string en un DFA, simulando la función de transición, 
+* Descripción: El programa genera la descripción instantanea de un string en un AFD, simulando la función de transición, 
 *              el DFA puede ser generado de forma aleatoria o mediante un archivo de texto. 
 * Curso: Fundamentos de Ciencia de la Computación I
 * Fecha: 4 de abril, 2023

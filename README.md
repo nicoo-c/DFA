@@ -2,7 +2,7 @@
 
 El programa cuenta con dos funciones para simular el autómata, la primera de forma aleatoria, para esta solo se debe ingresar el número de estados que desea simular.
 
-La segunda permite simular un autómata específico, este debe ser explicitado previo a la ejecución del programa en **un archivo de texto llamado automata.txt** ,el formato es el siguiente:
+La segunda permite simular un autómata específico, este debe ser explicitado previo a la ejecución del programa en un archivo de texto llamado automata.txt ,el formato es el siguiente:
 
 - Los estados deben enumerarse desde 0.
 - El alfabeto es el único elemento que puede ser no númerico, los demás elementos deben ser númericos, no se aceptan estados del tipo 'q0' o '2a'.  
